@@ -3,15 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Daniela & Mauricio - Escaleras</title>
+<title>Daniela & Mauricio</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-}
-
+html{scroll-behavior:smooth}
 body{
   margin:0;
   background:#03050a;
@@ -19,12 +15,13 @@ body{
   font-family:Georgia,serif;
   overflow-x:hidden;
 }
+body.lock{overflow:hidden}
 
 .audioOverlay{
   position:fixed;
   inset:0;
-  z-index:100;
-  background:rgba(0,0,0,.78);
+  z-index:200;
+  background:radial-gradient(circle,rgba(6,30,55,.92),rgba(0,0,0,.96) 75%);
   backdrop-filter:blur(8px);
   display:flex;
   justify-content:center;
@@ -32,31 +29,27 @@ body{
   text-align:center;
   padding:22px;
 }
-
 .audioBox{
-  width:min(92vw,540px);
+  width:min(92vw,560px);
   padding:34px 24px;
   border-radius:30px;
   background:rgba(5,16,32,.92);
   border:1px solid rgba(150,225,255,.42);
   box-shadow:0 0 55px rgba(0,210,255,.35);
 }
-
 .audioBox h1{
   color:#d7bd7e;
-  font-size:clamp(34px,8vw,66px);
+  font-size:clamp(38px,8vw,74px);
   font-weight:normal;
   margin-bottom:16px;
+  text-shadow:0 0 16px rgba(215,189,126,.35);
 }
-
 .audioBox p{
   color:#d8f8ff;
   font-size:18px;
   line-height:1.5;
 }
-
-.audioBox button,
-.btn{
+.audioBox button,.btn{
   margin-top:24px;
   border:none;
   border-radius:999px;
@@ -71,50 +64,24 @@ body{
   box-shadow:0 0 24px rgba(0,210,255,.55);
 }
 
-.bgFixed{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  background:
-    linear-gradient(to bottom,rgba(0,0,0,.10),rgba(0,0,0,.32),rgba(0,0,0,.80)),
-    url("escaleras.png");
-  background-size:cover;
-  background-position:center;
-  transform:scale(1.06);
-  transition:.1s linear;
-}
-
-.vignette{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.72) 100%);
-}
-
 .layer{
   position:fixed;
   inset:0;
-  z-index:4;
+  z-index:15;
   pointer-events:none;
   overflow:hidden;
 }
-
 .butterfly{
   position:absolute;
   width:120px;
   height:auto;
   opacity:.94;
-  filter:
-    drop-shadow(0 0 12px #00aaff)
-    drop-shadow(0 0 28px rgba(0,180,255,.85));
+  filter:drop-shadow(0 0 12px #00aaff) drop-shadow(0 0 28px rgba(0,180,255,.85));
   transform-origin:center;
   animation:glow 1.5s infinite alternate ease-in-out;
 }
-
 .butterfly.big{width:175px}
 .butterfly.small{width:78px}
-
 .sparkle{
   position:absolute;
   width:4px;
@@ -124,37 +91,40 @@ body{
   box-shadow:0 0 14px #00d9ff;
 }
 
-section{
+/* ENTRADA */
+.entrance{
   position:relative;
-  z-index:5;
   min-height:100svh;
+  overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:60px 20px;
-}
-
-.card{
-  width:min(92vw,760px);
-  padding:38px 26px;
-  border-radius:30px;
   text-align:center;
   background:
-    radial-gradient(circle at top,rgba(0,210,255,.18),transparent 35%),
-    rgba(5,16,32,.82);
-  border:1px solid rgba(150,225,255,.42);
-  box-shadow:0 0 55px rgba(0,210,255,.28);
-  backdrop-filter:blur(9px);
-  opacity:0;
-  transform:translateY(60px) scale(.96);
-  transition:1s ease;
+    linear-gradient(to bottom,rgba(0,0,0,.12),rgba(0,0,0,.35),rgba(0,0,0,.72)),
+    url("entrada_castillo.png");
+  background-size:cover;
+  background-position:center;
 }
-
-.card.show{
-  opacity:1;
-  transform:translateY(0) scale(1);
+.entrance::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:radial-gradient(circle,transparent 35%,rgba(0,0,0,.70) 100%);
 }
-
+.entranceContent{
+  position:relative;
+  z-index:5;
+  width:min(92vw,780px);
+  padding:36px 24px;
+  border-radius:30px;
+  background:rgba(0,0,0,.38);
+  border:1px solid rgba(150,225,255,.32);
+  box-shadow:0 0 50px rgba(0,210,255,.25);
+  backdrop-filter:blur(7px);
+  transition:1.2s ease;
+}
 .monograma{
   width:135px;
   height:135px;
@@ -171,49 +141,14 @@ section{
   background:rgba(0,0,0,.22);
   box-shadow:0 0 25px rgba(215,189,126,.25);
 }
-
 h1,h2{
   color:#d7bd7e;
   font-weight:normal;
   text-shadow:0 0 14px rgba(215,189,126,.36),0 2px 10px #000;
 }
-
-h1{
-  font-size:clamp(42px,9vw,82px);
-  line-height:1.05;
-}
-
-h2{
-  font-size:clamp(34px,7vw,64px);
-  margin-bottom:15px;
-}
-
-.y{
-  font-size:34px;
-  font-style:italic;
-  color:white;
-  margin:6px 0;
-}
-
-.icon{
-  font-size:60px;
-  margin-bottom:12px;
-}
-
-p{
-  font-size:21px;
-  line-height:1.6;
-  color:#d8f8ff;
-  margin:12px 0;
-}
-
-.dato{
-  font-size:clamp(36px,9vw,72px);
-  color:#f1fbff;
-  text-shadow:0 0 18px #00bfff;
-  margin:18px 0;
-}
-
+h1{font-size:clamp(46px,9vw,88px);line-height:1.05}
+h2{font-size:clamp(34px,7vw,64px);margin-bottom:15px}
+.y{font-size:34px;font-style:italic;color:white;margin:6px 0}
 .adorno{
   margin:28px auto;
   width:220px;
@@ -221,7 +156,6 @@ p{
   background:linear-gradient(90deg,transparent,#d7bd7e,transparent);
   position:relative;
 }
-
 .adorno:after{
   content:"❦";
   position:absolute;
@@ -233,32 +167,126 @@ p{
   color:#d7bd7e;
   font-size:24px;
 }
-
-.counter{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-top:24px;
+.entranceContent p{
+  font-size:21px;
+  line-height:1.6;
+  color:#d8f8ff;
+  margin:12px 0;
+}
+.doorFrame{
+  position:absolute;
+  z-index:6;
+  left:50%;
+  top:47%;
+  width:26vw;
+  height:34vh;
+  max-width:420px;
+  max-height:440px;
+  min-width:210px;
+  min-height:240px;
+  transform:translate(-50%,-35%);
+  pointer-events:none;
+  opacity:0;
+}
+.doorLeft,.doorRight{
+  position:absolute;
+  top:0;
+  width:50%;
+  height:100%;
+  background:linear-gradient(90deg,rgba(45,18,8,.85),rgba(130,72,24,.72),rgba(35,12,5,.9));
+  border:2px solid rgba(220,180,100,.75);
+  box-shadow:0 0 24px rgba(0,0,0,.8), inset 0 0 25px rgba(0,0,0,.7);
+  transition:1.3s ease;
+}
+.doorLeft{left:0;transform-origin:left}
+.doorRight{right:0;transform-origin:right}
+.entrance.opening .doorFrame{opacity:1}
+.entrance.opening .doorLeft{transform:perspective(600px) rotateY(-78deg)}
+.entrance.opening .doorRight{transform:perspective(600px) rotateY(78deg)}
+.entrance.opening .entranceContent{opacity:0;transform:scale(.86)}
+.entrance.opening{animation:zoomDoor 1.6s ease forwards}
+@keyframes zoomDoor{
+  from{filter:brightness(1);transform:scale(1)}
+  to{filter:brightness(1.25);transform:scale(1.18)}
 }
 
+/* ESCALERAS */
+.stairsBg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.10),rgba(0,0,0,.35),rgba(0,0,0,.82)),
+    url("escaleras.png");
+  background-size:cover;
+  background-position:center top;
+  transform:scale(1.06);
+  opacity:0;
+  transition:1.4s ease;
+  pointer-events:none;
+}
+body.journey .stairsBg{opacity:1}
+.vignette{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.72) 100%);
+  opacity:0;
+  transition:1s;
+}
+body.journey .vignette{opacity:1}
+
+.journeySections{
+  position:relative;
+  z-index:5;
+  display:none;
+}
+body.journey .journeySections{display:block}
+body.journey .entrance{display:none}
+section.step{
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:60px 20px;
+}
+.card{
+  width:min(92vw,760px);
+  padding:38px 26px;
+  border-radius:30px;
+  text-align:center;
+  background:radial-gradient(circle at top,rgba(0,210,255,.18),transparent 35%),rgba(5,16,32,.82);
+  border:1px solid rgba(150,225,255,.42);
+  box-shadow:0 0 55px rgba(0,210,255,.28);
+  backdrop-filter:blur(9px);
+  opacity:0;
+  transform:translateY(60px) scale(.96);
+  transition:1s ease;
+}
+.card.show{opacity:1;transform:translateY(0) scale(1)}
+.icon{font-size:60px;margin-bottom:12px}
+p{
+  font-size:21px;
+  line-height:1.6;
+  color:#d8f8ff;
+  margin:12px 0;
+}
+.dato{
+  font-size:clamp(36px,9vw,72px);
+  color:#f1fbff;
+  text-shadow:0 0 18px #00bfff;
+  margin:18px 0;
+}
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
 .box{
   padding:16px 8px;
   border-radius:18px;
   background:rgba(255,255,255,.08);
   border:1px solid rgba(125,230,255,.25);
 }
-
-.num{
-  font-size:36px;
-  color:#7ce7ff;
-  font-weight:bold;
-}
-
-.txt{
-  font-size:12px;
-  color:#d8f8ff;
-}
-
+.num{font-size:36px;color:#7ce7ff;font-weight:bold}
+.txt{font-size:12px;color:#d8f8ff}
 .mapBox{
   margin:20px auto 12px;
   width:min(92%,520px);
@@ -270,7 +298,6 @@ p{
   position:relative;
   overflow:hidden;
 }
-
 .mapBox:before{
   content:"";
   position:absolute;
@@ -280,31 +307,58 @@ p{
     radial-gradient(circle at 70% 40%,#6d4d2b 0 6px,transparent 7px),
     radial-gradient(circle at 30% 70%,#6d4d2b 0 5px,transparent 6px);
 }
-
-.envelopeRain{
-  position:relative;
-  height:165px;
-  overflow:hidden;
-  margin-top:18px;
-}
-
-.env{
-  position:absolute;
-  font-size:34px;
-  animation:fall 4s infinite linear;
-}
-
+.envelopeRain{position:relative;height:165px;overflow:hidden;margin-top:18px}
+.env{position:absolute;font-size:34px;animation:fall 4s infinite linear}
 .env:nth-child(1){left:10%;animation-delay:0s}
 .env:nth-child(2){left:30%;animation-delay:1s}
 .env:nth-child(3){left:55%;animation-delay:.5s}
 .env:nth-child(4){left:75%;animation-delay:1.8s}
 .env:nth-child(5){left:90%;animation-delay:2.4s}
 
+/* SALON FINAL */
+.finalHall{
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.15),rgba(0,0,0,.70)),
+    url("interior_castillo.png");
+  background-size:cover;
+  background-position:center;
+}
+.objects{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:25px;
+}
+.objects button{
+  border:none;
+  border-radius:18px;
+  padding:17px 10px;
+  color:#20170f;
+  font-weight:bold;
+  background:linear-gradient(135deg,rgba(255,252,235,.94),rgba(194,169,122,.94));
+  border:2px solid rgba(72,44,20,.9);
+  box-shadow:0 0 18px rgba(0,0,0,.45), inset 0 0 18px rgba(255,255,255,.35);
+}
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+}
+.modal.show{display:flex}
+.modal .card{opacity:1;transform:none}
+.close{background:linear-gradient(45deg,#18263d,#516b8a)!important;color:white!important}
+
 .musicBtn{
   position:fixed;
   right:18px;
   top:18px;
-  z-index:30;
+  z-index:80;
   background:rgba(0,0,0,.58);
   border:1px solid rgba(150,225,255,.4);
   border-radius:999px;
@@ -318,142 +372,148 @@ p{
   from{filter:drop-shadow(0 0 10px #00aaff) drop-shadow(0 0 18px rgba(0,150,255,.55))}
   to{filter:drop-shadow(0 0 18px #00d9ff) drop-shadow(0 0 35px rgba(0,200,255,.9))}
 }
-
 @keyframes fall{
   0%{top:-50px;transform:rotate(0deg)}
   100%{top:180px;transform:rotate(360deg)}
 }
-
 @media(max-width:700px){
-  .bgFixed{
-    background-size:cover;
-    background-position:center top;
-  }
-
-  section{
-    padding:48px 16px;
-  }
-
-  .card{
-    padding:30px 18px;
-  }
-
-  p{
-    font-size:17px;
-  }
-
-  .counter{
-    grid-template-columns:repeat(2,1fr);
-  }
-
+  .entrance{background-size:cover;background-position:center}
+  .entranceContent{padding:26px 18px}
+  .entranceContent p,p{font-size:17px}
+  section.step{padding:48px 16px}
+  .card{padding:30px 18px}
+  .counter{grid-template-columns:repeat(2,1fr)}
   .butterfly{width:82px}
   .butterfly.big{width:120px}
   .butterfly.small{width:58px}
+  .objects{grid-template-columns:1fr}
 }
 </style>
 </head>
 
-<body>
+<body class="lock">
 
 <div class="audioOverlay" id="audioOverlay">
   <div class="audioBox">
     <h1>Daniela & Mauricio</h1>
-    <p>Presiona para abrir la invitación, activar la música y comenzar a bajar las escaleras del castillo.</p>
+    <p>Presiona para abrir la invitación, activar la música y entrar al castillo.</p>
     <button onclick="startExperience()">ABRIR INVITACIÓN CON MÚSICA</button>
   </div>
 </div>
 
-<div class="bgFixed" id="bgFixed"></div>
+<div class="stairsBg" id="stairsBg"></div>
 <div class="vignette"></div>
 <div class="layer" id="layer"></div>
-
 <button class="musicBtn" id="musicBtn" onclick="toggleMusic()">♫ Música</button>
 
-<section>
-  <div class="card">
+<section class="entrance" id="entrance">
+  <div class="doorFrame">
+    <div class="doorLeft"></div>
+    <div class="doorRight"></div>
+  </div>
+  <div class="entranceContent">
     <div class="monograma"><span>D</span><span>M</span></div>
     <h1>DANIELA</h1>
     <div class="y">y</div>
     <h1>MAURICIO</h1>
     <div class="adorno"></div>
-    <p>Desliza hacia abajo para descender las escaleras del castillo y descubrir los detalles de nuestra boda.</p>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">📅</div>
-    <h2>Fecha</h2>
-    <p>Reserva este día para acompañarnos en nuestra historia.</p>
-    <div class="dato">17 de Octubre</div>
-    <p>2026</p>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">🕯️</div>
-    <h2>Hora</h2>
-    <p>La celebración comenzará bajo la luz de la luna.</p>
-    <div class="dato">8:00 PM</div>
-    <p>Puedes cambiar esta hora por la definitiva.</p>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">⏳</div>
-    <h2>¿Cuánto falta?</h2>
-    <p>La cuenta regresiva para nuestra noche especial.</p>
-    <div class="counter">
-      <div class="box"><div class="num" id="d">0</div><div class="txt">DÍAS</div></div>
-      <div class="box"><div class="num" id="h">0</div><div class="txt">HORAS</div></div>
-      <div class="box"><div class="num" id="m">0</div><div class="txt">MINUTOS</div></div>
-      <div class="box"><div class="num" id="s">0</div><div class="txt">SEGUNDOS</div></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">🗺️</div>
-    <h2>Ubicación</h2>
-    <p>Aquí podrás ver cómo llegar a la ceremonia y celebración.</p>
-    <div class="mapBox"></div>
-    <a class="btn" href="https://maps.google.com" target="_blank">Abrir Google Maps</a>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">💌</div>
-    <h2>Lluvia de Sobres</h2>
-    <p>Su presencia es nuestro mejor regalo.</p>
-    <p>Si desean tener un detalle con nosotros, agradeceremos de corazón una contribución en sobre para comenzar esta nueva etapa llena de sueños y amor.</p>
-    <div class="envelopeRain">
-      <div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">✉️</div>
-    <h2>Confirma tu Asistencia</h2>
-    <p>Nos ayudará mucho saber si nos acompañas en este día tan especial.</p>
-    <a class="btn" href="https://wa.me/5215512345678?text=Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Daniela%20y%20Mauricio.%20Mi%20nombre%20es%3A" target="_blank">Confirmar por WhatsApp</a>
-  </div>
-</section>
-
-<section>
-  <div class="card">
-    <div class="icon">🌷</div>
-    <h2>Nos vemos en el altar</h2>
-    <p>Gracias por formar parte de nuestra historia.</p>
-    <div class="dato">Daniela & Mauricio</div>
+    <p>Una historia escrita bajo la luz de la luna.</p>
     <p>17 · Octubre · 2026</p>
+    <button onclick="openDoors()">ABRIR LAS PUERTAS</button>
   </div>
 </section>
+
+<div class="journeySections">
+  <section class="step">
+    <div class="card">
+      <div class="icon">🪜</div>
+      <h2>Entraste al castillo</h2>
+      <p>Ahora desliza hacia abajo para descender las escaleras y descubrir los detalles de nuestra boda.</p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="card">
+      <div class="icon">📅</div>
+      <h2>Fecha</h2>
+      <p>Reserva este día para acompañarnos.</p>
+      <div class="dato">17 de Octubre</div>
+      <p>2026</p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="card">
+      <div class="icon">🕯️</div>
+      <h2>Hora</h2>
+      <p>La celebración comenzará bajo la luz de la luna.</p>
+      <div class="dato">8:00 PM</div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="card">
+      <div class="icon">⏳</div>
+      <h2>¿Cuánto falta?</h2>
+      <p>Cuenta regresiva para nuestra noche especial.</p>
+      <div class="counter">
+        <div class="box"><div class="num" id="d">0</div><div class="txt">DÍAS</div></div>
+        <div class="box"><div class="num" id="h">0</div><div class="txt">HORAS</div></div>
+        <div class="box"><div class="num" id="m">0</div><div class="txt">MINUTOS</div></div>
+        <div class="box"><div class="num" id="s">0</div><div class="txt">SEGUNDOS</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="card">
+      <div class="icon">🗺️</div>
+      <h2>Ubicación</h2>
+      <p>Aquí podrás ver cómo llegar a la ceremonia y celebración.</p>
+      <div class="mapBox"></div>
+      <a class="btn" href="https://maps.google.com" target="_blank">Abrir Google Maps</a>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="card">
+      <div class="icon">💌</div>
+      <h2>Lluvia de Sobres</h2>
+      <p>Su presencia es nuestro mejor regalo.</p>
+      <p>Si desean tener un detalle con nosotros, agradeceremos de corazón una contribución en sobre para comenzar esta nueva etapa llena de sueños y amor.</p>
+      <div class="envelopeRain">
+        <div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step finalHall">
+    <div class="card">
+      <div class="icon">🏰</div>
+      <h2>Salón del Castillo</h2>
+      <p>Toca una sección para ver más detalles.</p>
+      <div class="objects">
+        <button onclick="openModal('book')">📖 Confirmación</button>
+        <button onclick="openModal('map')">🗺 Ubicación</button>
+        <button onclick="openModal('urn')">💌 Sobres</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="card">
+      <div class="icon">🌷</div>
+      <h2>Nos vemos en el altar</h2>
+      <p>Gracias por formar parte de nuestra historia.</p>
+      <div class="dato">Daniela & Mauricio</div>
+      <p>17 · Octubre · 2026</p>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="modal">
+  <div class="card" id="modalCard"></div>
+</div>
 
 <audio id="audio" loop preload="auto" playsinline>
   <source src="musica.mp3" type="audio/mpeg">
@@ -463,14 +523,17 @@ p{
 const audio=document.getElementById('audio');
 const audioOverlay=document.getElementById('audioOverlay');
 const musicBtn=document.getElementById('musicBtn');
-const bgFixed=document.getElementById('bgFixed');
+const entrance=document.getElementById('entrance');
+const stairsBg=document.getElementById('stairsBg');
+const modal=document.getElementById('modal');
+const modalCard=document.getElementById('modalCard');
 
 function startExperience(){
   audioOverlay.style.display='none';
+  document.body.classList.remove('lock');
   audio.volume=.85;
   audio.play().then(()=>musicBtn.textContent='♫ Pausar').catch(()=>musicBtn.textContent='♫ Música');
 }
-
 function toggleMusic(){
   audio.volume=.85;
   if(audio.paused){
@@ -480,26 +543,27 @@ function toggleMusic(){
     musicBtn.textContent='♫ Música';
   }
 }
+function openDoors(){
+  entrance.classList.add('opening');
+  setTimeout(()=>{
+    document.body.classList.add('journey');
+    window.scrollTo({top:0,behavior:'instant'});
+  },1400);
+}
 
-/* Efecto de descenso/parallax */
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
-  bgFixed.style.backgroundPosition=`center ${-y*0.12}px`;
-  bgFixed.style.transform=`scale(${1.06 + Math.min(y/9000,.08)})`;
+  stairsBg.style.backgroundPosition=`center ${-y*0.12}px`;
+  stairsBg.style.transform=`scale(${1.06 + Math.min(y/9000,.08)})`;
 });
 
-/* Aparecer tarjetas al bajar */
 const cards=[...document.querySelectorAll('.card')];
 const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting)e.target.classList.add('show');
-  });
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
 },{threshold:.35});
 cards.forEach(c=>obs.observe(c));
 
-/* Cuenta regresiva */
 const fecha=new Date('2026-10-17T20:00:00').getTime();
-
 function updateCount(){
   const dif=fecha-Date.now();
   let diasV=0, horasV=0, minV=0, segV=0;
@@ -509,82 +573,72 @@ function updateCount(){
     minV=Math.floor((dif%(1000*60*60))/(1000*60));
     segV=Math.floor((dif%(1000*60))/1000);
   }
-  d.textContent=diasV;
-  h.textContent=horasV;
-  m.textContent=minV;
-  s.textContent=segV;
+  d.textContent=diasV; h.textContent=horasV; m.textContent=minV; s.textContent=segV;
 }
-setInterval(updateCount,1000);
-updateCount();
+setInterval(updateCount,1000); updateCount();
+
+function openModal(type){
+  let c='';
+  if(type==='book'){
+    c='<h2>Libro de Confirmación</h2><p>Nos ayudará mucho saber si nos acompañas en este día tan especial.</p><div class="btns"><a class="btn" href="https://wa.me/5215512345678?text=Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Daniela%20y%20Mauricio.%20Mi%20nombre%20es%3A" target="_blank">Confirmar por WhatsApp</a><button class="btn close" onclick="closeModal()">Cerrar</button></div>';
+  }
+  if(type==='map'){
+    c='<h2>Mesa del Mapa</h2><p>Cambia el enlace por la ubicación real de la ceremonia y celebración.</p><div class="mapBox"></div><div class="btns"><a class="btn" href="https://maps.google.com" target="_blank">Abrir Google Maps</a><button class="btn close" onclick="closeModal()">Cerrar</button></div>';
+  }
+  if(type==='urn'){
+    c='<h2>Urna de Sobres</h2><p>Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, agradeceremos de corazón una contribución en sobre.</p><button class="btn close" onclick="closeModal()">Cerrar</button>';
+  }
+  modalCard.innerHTML=c;
+  modal.classList.add('show');
+}
+function closeModal(){modal.classList.remove('show')}
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
 
 /* Mariposas reales animadas */
 const layer=document.getElementById('layer');
-
 for(let i=0;i<18;i++){
   const b=document.createElement('img');
   b.src='mariposa_azul.png';
   b.className='butterfly';
   if(Math.random()<.25)b.classList.add('big');
   if(Math.random()<.35)b.classList.add('small');
-
   b.style.left=Math.random()*100+'vw';
   b.style.top=Math.random()*100+'vh';
   layer.appendChild(b);
-
-  let x=parseFloat(b.style.left);
-  let y=parseFloat(b.style.top);
-  let t=Math.random()*10;
-  let sp=.012+Math.random()*.02;
-  let scale=.5+Math.random()*.9;
-  let dir=Math.random()<.5?-1:1;
-
+  let x=parseFloat(b.style.left), y=parseFloat(b.style.top), t=Math.random()*10, sp=.012+Math.random()*.02;
+  let scale=.5+Math.random()*.9, dir=Math.random()<.5?-1:1;
   function move(){
     t+=sp;
     x+=Math.sin(t)*.05*dir;
     y+=Math.cos(t*1.15)*.035-.008;
-
     if(y<-15)y=110;
     if(x<-15)x=110;
     if(x>110)x=-15;
-
     const flap=1 + Math.sin(t*18)*.08;
     const rot=Math.sin(t*2)*10*dir;
-
     b.style.left=x+'vw';
     b.style.top=y+'vh';
     b.style.transform='translate(-50%,-50%) scale('+scale*flap+') rotate('+rot+'deg)';
-
     requestAnimationFrame(move);
   }
-
   move();
 }
-
-/* Partículas */
 function sparkle(){
   const s=document.createElement('div');
   s.className='sparkle';
   s.style.left=Math.random()*100+'vw';
   s.style.top='105vh';
   layer.appendChild(s);
-
-  let y=105;
-  let x=parseFloat(s.style.left);
-  let life=0;
-
+  let y=105,x=parseFloat(s.style.left),life=0;
   function move(){
     life++;
     y-=.10+Math.random()*.035;
     x+=Math.sin(life*.035)*.05;
-
     s.style.top=y+'vh';
     s.style.left=x+'vw';
     s.style.opacity=Math.max(0,1-life/900);
-
-    if(life<900)requestAnimationFrame(move);
-    else s.remove();
+    if(life<900)requestAnimationFrame(move); else s.remove();
   }
-
   move();
 }
 setInterval(sparkle,90);
