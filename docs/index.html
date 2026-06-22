@@ -220,10 +220,12 @@ h2{font-size:clamp(34px,7vw,64px);margin-bottom:15px}
     url("escaleras.png");
   background-size:cover;
   background-position:center top;
-  transform:scale(1.06);
+  background-repeat:no-repeat;
+  transform:scale(1.03);
   opacity:0;
   transition:1.4s ease;
   pointer-events:none;
+  will-change:opacity;
 }
 body.journey .stairsBg{opacity:1}
 .vignette{
@@ -388,6 +390,63 @@ p{
   .butterfly.small{width:58px}
   .objects{grid-template-columns:1fr}
 }
+
+/* OPTIMIZACIÓN ANDROID */
+@media(max-width:700px){
+  html,body{
+    overscroll-behavior:none;
+  }
+
+  .entrance{
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
+  }
+
+  .stairsBg{
+    position:fixed;
+    background-size:cover;
+    background-position:center top!important;
+    background-repeat:no-repeat!important;
+    transform:none!important;
+    will-change:auto;
+  }
+
+  .vignette{
+    background:linear-gradient(to bottom,rgba(0,0,0,.08),rgba(0,0,0,.55),rgba(0,0,0,.82));
+  }
+
+  .butterfly{
+    width:64px;
+    opacity:.82;
+  }
+
+  .butterfly.big{
+    width:86px;
+  }
+
+  .butterfly.small{
+    width:48px;
+  }
+
+  .sparkle{
+    display:none;
+  }
+
+  .card{
+    backdrop-filter:none;
+    background:rgba(5,16,32,.86);
+  }
+
+  .audioOverlay{
+    backdrop-filter:none;
+  }
+
+  .modal{
+    backdrop-filter:none;
+  }
+}
+
 </style>
 </head>
 
@@ -551,11 +610,15 @@ function openDoors(){
   },1400);
 }
 
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  stairsBg.style.backgroundPosition=`center ${-y*0.12}px`;
-  stairsBg.style.transform=`scale(${1.06 + Math.min(y/9000,.08)})`;
-});
+const isMobile = window.matchMedia('(max-width: 700px)').matches;
+
+if(!isMobile){
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    stairsBg.style.backgroundPosition=`center ${-y*0.12}px`;
+    stairsBg.style.transform=`scale(${1.03 + Math.min(y/12000,.05)})`;
+  }, {passive:true});
+}
 
 const cards=[...document.querySelectorAll('.card')];
 const obs=new IntersectionObserver(entries=>{
@@ -596,7 +659,8 @@ modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
 
 /* Mariposas reales animadas */
 const layer=document.getElementById('layer');
-for(let i=0;i<18;i++){
+const butterflyCount = isMobile ? 7 : 18;
+for(let i=0;i<butterflyCount;i++){
   const b=document.createElement('img');
   b.src='mariposa_azul.png';
   b.className='butterfly';
@@ -641,7 +705,7 @@ function sparkle(){
   }
   move();
 }
-setInterval(sparkle,90);
+if(!isMobile){ setInterval(sparkle,130); }
 </script>
 
 </body>
