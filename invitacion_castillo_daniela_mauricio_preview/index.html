@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela & Mauricio - Castillo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#020711;color:white;font-family:Georgia,serif}
+.bg{position:fixed;inset:0;background-size:cover;background-position:center;transition:1.6s ease;transform:scale(1.04)}
+.entrada{background-image:linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.4)),url("entrada_castillo.png")}
+.interior{background-image:linear-gradient(rgba(0,0,0,.06),rgba(0,0,0,.45)),url("interior_castillo.png");opacity:0;transform:scale(1.12)}
+body.inside .entrada{opacity:0;transform:scale(1.35)}
+body.inside .interior{opacity:1;transform:scale(1.02)}
+.vignette{position:fixed;inset:0;background:radial-gradient(circle,transparent 35%,rgba(0,0,0,.72) 96%);z-index:3;pointer-events:none}
+.intro{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;background:radial-gradient(circle,rgba(6,30,55,.9),rgba(0,0,0,.92) 75%);transition:1.2s}
+.intro.hide{opacity:0;pointer-events:none;transform:scale(1.08)}
+.intro h1{font-size:clamp(44px,8vw,96px);line-height:1;color:#e8fbff;text-shadow:0 0 14px #52ddff,0 0 40px #1a70ff,0 0 80px #654dff}
+.intro .date{margin-top:22px;color:#bdefff;letter-spacing:5px;font-size:clamp(18px,3vw,30px)}
+.intro .phrase{margin-top:22px;color:#d9f7ff;font-size:clamp(17px,2.6vw,24px);font-style:italic}
+button,a.btn{border:none;text-decoration:none;border-radius:999px;padding:14px 24px;color:white;font-weight:bold;font-size:16px;cursor:pointer;background:linear-gradient(45deg,#0b4cff,#00d9ff,#7b5cff);box-shadow:0 0 25px rgba(0,210,255,.55);transition:.25s;display:inline-block}
+button:hover,a.btn:hover{transform:scale(1.06)}
+.intro button{margin-top:40px;font-size:20px;padding:17px 36px}
+.title{position:fixed;top:22px;left:50%;transform:translateX(-50%);z-index:10;text-align:center;text-shadow:0 0 18px #00d9ff,0 4px 8px #000;transition:1s}
+.title h2{font-size:clamp(30px,6vw,70px);line-height:1}.title p{letter-spacing:5px;color:#bdefff;font-size:14px;margin-top:5px}
+body:not(.inside) .title{opacity:0;transform:translateX(-50%) translateY(-20px)}
+.enter-btn{position:fixed;z-index:12;left:50%;bottom:64px;transform:translateX(-50%);display:none}
+body.started:not(.inside) .enter-btn{display:block}.enter-btn:hover{transform:translateX(-50%) scale(1.06)}
+.hotspots{position:fixed;inset:0;z-index:12;display:none}body.inside .hotspots{display:block}
+.hotspot{position:absolute;border:2px solid rgba(125,230,255,.65);border-radius:999px;background:rgba(0,210,255,.12);box-shadow:0 0 25px rgba(0,210,255,.65), inset 0 0 20px rgba(255,255,255,.12);cursor:pointer;animation:pulse 1.7s infinite alternate}
+.hotspot span{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);white-space:nowrap;background:rgba(0,0,0,.62);border:1px solid rgba(125,230,255,.5);padding:8px 12px;border-radius:999px;font-size:13px;color:#d8f8ff}
+@keyframes pulse{from{transform:scale(1);opacity:.75}to{transform:scale(1.08);opacity:1}}
+.book-spot{left:7%;top:35%;width:24%;height:24%}.map-spot{left:35%;top:46%;width:34%;height:25%}.urn-spot{right:6%;top:50%;width:22%;height:30%}
+.hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:15;background:rgba(0,0,0,.58);color:#d8f8ff;padding:10px 16px;border-radius:999px;font-size:13px;text-align:center;max-width:94vw;box-shadow:0 0 18px rgba(0,0,0,.55)}
+.modal{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.card{width:min(92vw,760px);max-height:88vh;overflow:auto;padding:36px 26px;border-radius:30px;background:radial-gradient(circle at top,rgba(80,170,210,.22),transparent 35%),rgba(4,15,35,.90);border:1px solid rgba(125,215,255,.45);box-shadow:0 0 60px rgba(0,210,255,.35), inset 0 0 35px rgba(70,160,255,.08);backdrop-filter:blur(14px);text-align:center}
+.card h2{font-size:clamp(34px,6vw,62px);color:#f1fbff;text-shadow:0 0 14px #5bdcff,0 0 35px #1a8cff;margin-bottom:16px}.card h3{color:#8cecff;margin-top:18px;font-size:24px}.card p{font-size:20px;line-height:1.55;color:#d7efff;margin:12px 0}.card .mini{color:#a9eaff;font-size:16px}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}.close{background:linear-gradient(45deg,#18263d,#516b8a)}
+.back{position:fixed;top:18px;left:18px;z-index:16;display:none}body.inside .back{display:block}
+.music{position:fixed;top:18px;right:18px;z-index:16;background:rgba(0,0,0,.55);border:1px solid rgba(125,230,255,.35);padding:10px 14px;border-radius:999px;color:#d8f8ff;font-size:13px;cursor:pointer}
+.layer{position:fixed;inset:0;z-index:4;pointer-events:none}.butterfly{position:absolute;filter:drop-shadow(0 0 10px #00d9ff);opacity:.9;animation:flap .6s infinite alternate ease-in-out}@keyframes flap{from{transform:scaleX(.75) rotate(-8deg)}to{transform:scaleX(1.15) rotate(8deg)}}
+.sparkle{position:absolute;width:4px;height:4px;border-radius:50%;background:#80eaff;box-shadow:0 0 12px #00d9ff;opacity:.8}
+@media(max-width:720px){.book-spot{left:4%;top:36%;width:30%;height:22%}.map-spot{left:30%;top:49%;width:38%;height:22%}.urn-spot{right:2%;top:52%;width:28%;height:25%}.hotspot span{font-size:11px}.card p{font-size:17px}.title{top:55px}}
+</style>
+</head>
+<body>
+<div class="bg entrada"></div><div class="bg interior"></div><div class="layer" id="layer"></div><div class="vignette"></div>
+<div class="intro" id="intro"><h1>Daniela<br>&<br>Mauricio</h1><div class="date">17 DE OCTUBRE</div><div class="phrase">Una historia escrita bajo la luz de la luna...</div><button onclick="startInvitation()">ABRIR INVITACIÓN</button></div>
+<div class="title"><h2>Daniela & Mauricio</h2><p>17 DE OCTUBRE</p></div>
+<button class="enter-btn" onclick="enterCastle()">ABRIR LAS PUERTAS</button>
+<button class="back" onclick="exitCastle()">← Volver a la entrada</button>
+<div class="music" onclick="toggleMusic()" id="musicBtn">♫ Música</div>
+<div class="hotspots">
+  <div class="hotspot book-spot" onclick="openModal('book')"><span>📖 Confirmación</span></div>
+  <div class="hotspot map-spot" onclick="openModal('map')"><span>🗺 Ubicación</span></div>
+  <div class="hotspot urn-spot" onclick="openModal('urn')"><span>💌 Lluvia de sobres</span></div>
+</div>
+<div class="hint" id="hint">Presiona “Abrir invitación” para comenzar</div>
+<div class="modal" id="modal"><div class="card" id="modalCard"></div></div>
+<audio id="audio" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+<script>
+const intro=document.getElementById('intro'),hint=document.getElementById('hint'),modal=document.getElementById('modal'),modalCard=document.getElementById('modalCard'),audio=document.getElementById('audio'),musicBtn=document.getElementById('musicBtn'),layer=document.getElementById('layer');
+function startInvitation(){document.body.classList.add('started');intro.classList.add('hide');hint.textContent='Presiona “Abrir las puertas” para entrar al castillo';audio.play().then(()=>musicBtn.textContent='♫ Pausar').catch(()=>musicBtn.textContent='♫ Tocar música')}
+function toggleMusic(){if(audio.paused){audio.play();musicBtn.textContent='♫ Pausar'}else{audio.pause();musicBtn.textContent='♫ Música'}}
+function enterCastle(){document.body.classList.add('inside');hint.textContent='Toca el libro, el mapa o la urna'}
+function exitCastle(){document.body.classList.remove('inside');closeModal();hint.textContent='Presiona “Abrir las puertas” para entrar al castillo'}
+function openModal(type){let c='';if(type==='book')c=`<h2>Libro de Confirmación</h2><p>Nos llena de alegría invitarte a celebrar nuestra boda.</p><h3>Daniela & Mauricio</h3><p><strong>17 de Octubre</strong></p><p class="mini">Tu presencia hará que esta noche cobre vida.</p><div class="btns"><a class="btn" href="https://wa.me/5215512345678?text=Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Daniela%20y%20Mauricio.%20Mi%20nombre%20es%3A" target="_blank">Confirmar por WhatsApp</a><button class="close" onclick="closeModal()">Cerrar</button></div>`;
+if(type==='map')c=`<h2>Mesa del Mapa</h2><p>Consulta la ubicación de nuestra ceremonia y celebración.</p><h3>Ubicación</h3><p class="mini">Cambia este enlace por el lugar exacto del evento.</p><div class="btns"><a class="btn" href="https://maps.google.com" target="_blank">Abrir Google Maps</a><button class="close" onclick="closeModal()">Cerrar</button></div>`;
+if(type==='urn')c=`<h2>Urna de Sobres</h2><p>Su presencia es nuestro mejor regalo.</p><p>Si desean tener un detalle con nosotros, agradeceremos de corazón una contribución en sobre para comenzar esta nueva etapa llena de sueños y amor.</p><p class="mini">Con cariño: Daniela & Mauricio</p><div class="btns"><button class="close" onclick="closeModal()">Cerrar</button></div>`;
+modalCard.innerHTML=c;modal.classList.add('show')}
+function closeModal(){modal.classList.remove('show')}modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+for(let i=0;i<22;i++){const b=document.createElement('div');b.className='butterfly';b.textContent='🦋';b.style.left=Math.random()*100+'vw';b.style.top=Math.random()*100+'vh';b.style.fontSize=(18+Math.random()*24)+'px';layer.appendChild(b);let x=parseFloat(b.style.left),y=parseFloat(b.style.top),t=Math.random()*10,s=.025+Math.random()*.025;function move(){t+=s;x+=Math.sin(t)*.06;y+=Math.cos(t*1.3)*.035-.012;if(y<-8)y=108;if(x<-8)x=108;if(x>108)x=-8;b.style.left=x+'vw';b.style.top=y+'vh';b.style.transform=`rotate(${Math.sin(t)*18}deg)`;requestAnimationFrame(move)}move()}
+function createSparkle(){const s=document.createElement('div');s.className='sparkle';s.style.left=Math.random()*100+'vw';s.style.top='105vh';layer.appendChild(s);let y=105,x=parseFloat(s.style.left),life=0;function move(){life++;y-=.10+Math.random()*.035;x+=Math.sin(life*.035)*.05;s.style.top=y+'vh';s.style.left=x+'vw';s.style.opacity=Math.max(0,1-life/900);if(life<900)requestAnimationFrame(move);else s.remove()}move()}setInterval(createSparkle,95);
+</script>
+</body>
+</html>
