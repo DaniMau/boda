@@ -446,7 +446,27 @@ p{
     backdrop-filter:none;
   }
 }
+.abrirPuertasBtn{
+    margin-top:40px;
+    padding:28px 50px;
+    font-size:clamp(28px,5vw,48px);
+    color:#fff8e6;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    background:linear-gradient(45deg,#0b4cff,#00d9ff,#7b5cff);
+    box-shadow:0 0 20px #00bfff,0 0 50px rgba(0,180,255,.7);
+    animation:resplandor 2s infinite alternate;
+}
 
+@keyframes resplandor{
+from{
+box-shadow:0 0 20px #00bfff,0 0 40px rgba(0,180,255,.7);
+}
+to{
+box-shadow:0 0 40px #00d9ff,0 0 80px rgba(0,180,255,1);
+}
+}
 </style>
 </head>
 
@@ -478,7 +498,9 @@ p{
     <div class="adorno"></div>
     <p>Una historia escrita bajo la luz de la luna.</p>
     <p>17 · Octubre · 2026</p>
-    <button onclick="openDoors()">ABRIR LAS PUERTAS</button>
+    <button class="abrirPuertasBtn" onclick="openDoors()">
+    🏰 ABRIR LAS PUERTAS DEL CASTILLO 🏰
+    </button>
   </div>
 </section>
 
