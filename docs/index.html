@@ -13,16 +13,23 @@ body.lock{overflow:hidden}
 .vignette{position:fixed;inset:0;z-index:1;background:radial-gradient(circle,transparent 35%,rgba(0,0,0,.70) 100%);pointer-events:none}
 .layer{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
 .butterfly{position:absolute;width:110px;height:auto;opacity:.92;filter:drop-shadow(0 0 12px #00aaff) drop-shadow(0 0 28px rgba(0,180,255,.85));animation:glow 1.5s infinite alternate ease-in-out}
-.butterfly.emoji{font-size:38px;width:auto}
 .sparkle{position:absolute;width:4px;height:4px;border-radius:50%;background:#79e8ff;box-shadow:0 0 14px #00d9ff}
 .audioOverlay{position:fixed;inset:0;z-index:100;background:radial-gradient(circle,rgba(6,30,55,.92),rgba(0,0,0,.96) 75%);display:flex;justify-content:center;align-items:center;text-align:center;padding:22px}
 .audioBox{width:min(92vw,560px);padding:34px 24px;border-radius:30px;background:rgba(5,16,32,.92);border:1px solid rgba(150,225,255,.42);box-shadow:0 0 55px rgba(0,210,255,.35)}
 .audioBox h1{color:#d7bd7e;font-size:clamp(38px,8vw,74px);font-weight:normal;margin-bottom:16px}
 .audioBox p{color:#d8f8ff;font-size:18px;line-height:1.5}
+.envelope{position:relative;width:210px;height:140px;margin:0 auto 22px;perspective:700px}
+.envBack{position:absolute;inset:0;background:linear-gradient(135deg,#d7bd7e,#8a6a37);clip-path:polygon(0 25%,50% 62%,100% 25%,100% 100%,0 100%);border-radius:12px;box-shadow:0 0 28px rgba(215,189,126,.35)}
+.envFlap{position:absolute;inset:0;background:linear-gradient(135deg,#f0d898,#9a7842);clip-path:polygon(0 25%,50% 70%,100% 25%,50% 0);transform-origin:50% 25%;animation:openFlap 2s infinite alternate ease-in-out}
+.envLetter{position:absolute;left:28px;right:28px;bottom:30px;height:88px;background:#fff8e0;border-radius:8px;transform:translateY(18px);animation:letterUp 2s infinite alternate ease-in-out;box-shadow:0 0 18px rgba(255,255,255,.35)}
+.envLetter:after{content:"D & M";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8a6a37;font-size:28px;font-weight:bold}
+@keyframes openFlap{from{transform:rotateX(0deg)}to{transform:rotateX(150deg)}}
+@keyframes letterUp{from{transform:translateY(32px)}to{transform:translateY(-18px)}}
 button,.btn{margin-top:24px;border:none;border-radius:999px;padding:15px 26px;color:white;font-size:17px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;background:linear-gradient(45deg,#0b4cff,#00d9ff,#7b5cff);box-shadow:0 0 24px rgba(0,210,255,.55)}
 .musicBtn{position:fixed;right:18px;top:18px;z-index:30;background:rgba(0,0,0,.58);border:1px solid rgba(150,225,255,.4);border-radius:999px;padding:10px 15px;color:#d8f8ff;cursor:pointer;box-shadow:0 0 18px rgba(0,210,255,.25);margin:0}
-section{position:relative;z-index:5;min-height:auto;display:flex;align-items:center;justify-content:center;padding:15px 15px}
-.card{width:min(92vw,760px);padding:38px 26px;border-radius:30px;text-align:center;background:radial-gradient(circle at top,rgba(0,210,255,.18),transparent 35%),rgba(5,16,32,.78);border:1px solid rgba(150,225,255,.42);box-shadow:0 0 55px rgba(0,210,255,.28);backdrop-filter:blur(8px);opacity:0;transform:translateY(60px) scale(.96);transition:1s ease}
+section{position:relative;z-index:5;min-height:auto;display:flex;align-items:center;justify-content:center;padding:22px 15px}
+section:first-of-type{padding-top:80px}
+.card{width:min(92vw,760px);padding:34px 24px;border-radius:30px;text-align:center;background:radial-gradient(circle at top,rgba(0,210,255,.18),transparent 35%),rgba(5,16,32,.80);border:1px solid rgba(150,225,255,.42);box-shadow:0 0 55px rgba(0,210,255,.28);backdrop-filter:blur(8px);opacity:0;transform:translateY(45px) scale(.96);transition:1s ease}
 .card.show{opacity:1;transform:translateY(0) scale(1)}
 .monograma{width:135px;height:135px;margin:0 auto 26px;border:2px solid #d7bd7e;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#d7bd7e;font-size:38px;line-height:.9;background:rgba(0,0,0,.22);box-shadow:0 0 25px rgba(215,189,126,.25)}
 h1,h2{color:#d7bd7e;font-weight:normal;text-shadow:0 0 14px rgba(215,189,126,.36),0 2px 10px #000}
@@ -31,127 +38,58 @@ h2{font-size:clamp(34px,7vw,64px);margin-bottom:15px}
 .y{font-size:34px;font-style:italic;color:white;margin:6px 0}
 .icon{font-size:60px;margin-bottom:12px}
 p{font-size:21px;line-height:1.6;color:#d8f8ff;margin:12px 0}
-.dato{font-size:clamp(36px,9vw,72px);color:#f1fbff;text-shadow:0 0 18px #00bfff;margin:18px 0}
+.dato{font-size:clamp(28px,8vw,58px);color:#f1fbff;text-shadow:0 0 18px #00bfff;margin:14px 0}
 .adorno{margin:28px auto;width:220px;height:1px;background:linear-gradient(90deg,transparent,#d7bd7e,transparent);position:relative}
 .adorno:after{content:"❦";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.45);padding:0 12px;color:#d7bd7e;font-size:24px}
 .counter{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
 .box{padding:16px 8px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(125,230,255,.25)}
 .num{font-size:36px;color:#7ce7ff;font-weight:bold}
 .txt{font-size:12px;color:#d8f8ff}
-.envelopeRain{position:relative;height:165px;overflow:hidden;margin-top:18px}
+.mapFrame,.formFrame{width:100%;height:320px;border:0;border-radius:22px;margin-top:18px;box-shadow:0 0 25px rgba(0,210,255,.25);background:#111}
+.formNote{font-size:15px;color:#aeeaff}
+.envelopeRain{position:relative;height:145px;overflow:hidden;margin-top:18px}
 .env{position:absolute;font-size:34px;animation:fall 4s infinite linear}
 .env:nth-child(1){left:10%;animation-delay:0s}.env:nth-child(2){left:30%;animation-delay:1s}.env:nth-child(3){left:55%;animation-delay:.5s}.env:nth-child(4){left:75%;animation-delay:1.8s}.env:nth-child(5){left:90%;animation-delay:2.4s}
 @keyframes glow{from{filter:drop-shadow(0 0 10px #00aaff) drop-shadow(0 0 18px rgba(0,150,255,.55))}to{filter:drop-shadow(0 0 18px #00d9ff) drop-shadow(0 0 35px rgba(0,200,255,.9))}}
 @keyframes fall{0%{top:-50px;transform:rotate(0deg)}100%{top:180px;transform:rotate(360deg)}}
 @media(max-width:700px){
-    /* Fondo */
-    .bg{
-        background-size:cover;
-        background-position:center top;
-        background-repeat:no-repeat;
-        transform:none;
-    }
-    .vignette{
-        background:linear-gradient(
-            to bottom,
-            rgba(0,0,0,.05),
-            rgba(0,0,0,.40),
-            rgba(0,0,0,.75)
-        );
-    }
-    /* Secciones más juntas */
-    section{
-        min-height:auto;
-        padding:10px 8px;
-        margin:0;
-    }
-    /* Tarjetas más pequeñas y pegadas */
-    .card{
-        width:95%;
-        padding:22px 16px;
-        margin:8px auto;
-        backdrop-filter:none;
-        background:rgba(5,16,32,.82);
-        border-radius:25px;
-    }
-    /* Letras */
-    h1{
-        font-size:50px;
-    }
-    h2{
-        font-size:34px;
-        margin-bottom:8px;
-    }
-    p{
-        font-size:17px;
-        margin:6px 0;
-    }
-    .dato{
-        font-size:44px;
-        margin:8px 0;
-    }
-    /* Contador */
-    .counter{
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-    }
-    .box{
-        padding:12px 5px;
-    }
-    .num{
-        font-size:28px;
-    }
-    /* Mariposas */
-    .butterfly{
-        width:65px;
-    }
-
-    .butterfly.big{
-        width:85px;
-    }
-
-    .butterfly.small{
-        width:45px;
-    }
-
-    .butterfly.emoji{
-        font-size:28px;
-    }
-
-    /* Quitar partículas para que vaya fluido */
-    .sparkle{
-        display:none;
-    }
-
+.bg{background-size:cover;background-position:center top;transform:none}
+.vignette{background:linear-gradient(to bottom,rgba(0,0,0,.08),rgba(0,0,0,.45),rgba(0,0,0,.78))}
+section{min-height:auto;padding:10px 8px;margin:0}
+section:first-of-type{padding-top:70px}
+.card{width:95%;padding:22px 16px;margin:8px auto;backdrop-filter:none;background:rgba(5,16,32,.84);border-radius:25px}
+h1{font-size:50px} h2{font-size:34px;margin-bottom:8px} p{font-size:17px;margin:6px 0} .dato{font-size:36px;margin:8px 0}
+.counter{grid-template-columns:repeat(2,1fr);gap:8px} .box{padding:12px 5px} .num{font-size:28px}
+.butterfly{width:65px} .sparkle{display:none} .mapFrame,.formFrame{height:290px} .envelope{width:170px;height:115px}
 }
 </style>
 </head>
 <body class="lock">
 <div class="bg" id="bg"></div><div class="vignette"></div><div class="layer" id="layer"></div>
-<div class="audioOverlay" id="audioOverlay"><div class="audioBox"><h1>Daniela & Mauricio</h1><p>Presiona para abrir la invitación y activar la música.</p><button onclick="startExperience()">ABRIR INVITACIÓN CON MÚSICA</button></div></div>
+<div class="audioOverlay" id="audioOverlay"><div class="audioBox">
+<div class="envelope"><div class="envLetter"></div><div class="envBack"></div><div class="envFlap"></div></div>
+<h1>Daniela & Mauricio</h1><p>Presiona para abrir el sobre y activar la música.</p><button onclick="startExperience()">ABRIR INVITACIÓN</button>
+</div></div>
 <button class="musicBtn" id="musicBtn" onclick="toggleMusic()">♫ Música</button>
-
 <section><div class="card"><div class="monograma"><span>D</span><span>M</span></div><h1>DANIELA</h1><div class="y">y</div><h1>MAURICIO</h1><div class="adorno"></div><p>Una historia escrita bajo la luz de la luna.</p><p>Desliza hacia abajo para ver los detalles de nuestra boda.</p></div></section>
-<section><div class="card"><div class="icon">📅</div><h2>Fecha</h2><p>Reserva este día para acompañarnos.</p><div class="dato">17 de Octubre</div><p>2026</p></div></section>
-<section><div class="card"><div class="icon">🕯️</div><h2>Hora</h2><p>La celebración comenzará bajo la luz de la luna.</p><div class="dato">8:00 PM</div></div></section>
-<section><div class="card"><div class="icon">⏳</div><h2>¿Cuánto falta?</h2><p>Cuenta regresiva para nuestra noche especial.</p><div class="counter"><div class="box"><div class="num" id="d">0</div><div class="txt">DÍAS</div></div><div class="box"><div class="num" id="h">0</div><div class="txt">HORAS</div></div><div class="box"><div class="num" id="m">0</div><div class="txt">MINUTOS</div></div><div class="box"><div class="num" id="s">0</div><div class="txt">SEGUNDOS</div></div></div></div></section>
-<section><div class="card"><div class="icon">✉️</div><h2>Confirma tu Asistencia</h2><p>Nos ayudará mucho saber si nos acompañas en este día tan especial.</p><a class="btn" href="https://wa.me/5215512345678?text=Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Daniela%20y%20Mauricio.%20Mi%20nombre%20es%3A" target="_blank">Confirmar por WhatsApp</a></div></section>
-<section><div class="card"><div class="icon">⛪</div><h2>Ubicación de la Iglesia</h2><p>Aquí podrás ver cómo llegar a la ceremonia religiosa.</p><div class="dato" style="font-size:clamp(28px,7vw,54px)">Iglesia</div><a class="btn" href="https://maps.app.goo.gl/rWq6uypNpg8cNB5u8" target="_blank">Ver Iglesia en Maps</a></div></section>
-
-<section><div class="card"><div class="icon">🏰</div><h2>Ubicación del Salón</h2><p>Aquí podrás ver cómo llegar a la recepción y celebración.</p><div class="dato" style="font-size:clamp(28px,7vw,54px)">Salón</div><a class="btn" href="https://maps.app.goo.gl/g2nRedJvkmxrHBo48" target="_blank">Ver Salón en Maps</a></div></section>
-<section><div class="card"><div class="icon">💌</div><h2>Lluvia de Sobres</h2><p>Su presencia es nuestro mejor regalo.</p><p>Si desean tener un detalle con nosotros, agradeceremos de corazón una contribución en sobre para comenzar esta nueva etapa llena de sueños y amor.</p><div class="envelopeRain"><div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div></div></div></section>
+<section><div class="card"><div class="icon">📅</div><h2>Fecha</h2><div class="dato">17 de Octubre</div><p>2026</p></div></section>
+<section><div class="card"><div class="icon">🕯️</div><h2>Hora</h2><div class="dato">8:00 PM</div></div></section>
+<section><div class="card"><div class="icon">⏳</div><h2>¿Cuánto falta?</h2><div class="counter"><div class="box"><div class="num" id="d">0</div><div class="txt">DÍAS</div></div><div class="box"><div class="num" id="h">0</div><div class="txt">HORAS</div></div><div class="box"><div class="num" id="m">0</div><div class="txt">MINUTOS</div></div><div class="box"><div class="num" id="s">0</div><div class="txt">SEGUNDOS</div></div></div></div></section>
+<section><div class="card"><div class="icon">⛪</div><h2>Iglesia</h2><div class="dato">Parroquia del Señor de la Santa Cruz de Meyehualco</div><iframe class="mapFrame" src="https://www.google.com/maps?q=Parroquia%20del%20Se%C3%B1or%20de%20la%20Santa%20Cruz%20de%20Meyehualco%2019.3397784%2C-99.039436&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="btn" href="https://maps.app.goo.gl/sLRYYjcC8US5bAu86" target="_blank">Abrir ruta</a></div></section>
+<section><div class="card"><div class="icon">🏰</div><h2>Salón</h2><div class="dato">RECEPCIONES IMPERIAL</div><iframe class="mapFrame" src="https://www.google.com/maps?q=RECEPCIONES%20IMPERIAL%2019.3415979%2C-99.032196&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="btn" href="https://maps.app.goo.gl/Hg4pnbL4usvSAvcAA" target="_blank">Abrir ruta</a></div></section>
+<section><div class="card"><div class="icon">💌</div><h2>Lluvia de Sobres</h2><p>Su presencia es nuestro mejor regalo.</p><p>Si desean tener un detalle con nosotros, agradeceremos de corazón una contribución en sobre.</p><div class="envelopeRain"><div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div><div class="env">💌</div><div class="env">✉️</div></div></div></section>
+<section><div class="card"><div class="icon">📝</div><h2>Confirma tu Asistencia</h2><p>Selecciona cuántas personas asistirán y escribe sus nombres en el formulario.</p><p class="formNote">Cuando me pases el enlace de tu Google Form, lo coloco aquí para que se guarde en Google Sheets.</p><iframe class="formFrame" id="formFrame" src="about:blank"></iframe><a class="btn" href="#" onclick="alert('Falta pegar aquí el enlace de tu Google Form.');return false;">Abrir formulario</a></div></section>
 <section><div class="card"><div class="icon">🌷</div><h2>Gracias por acompañarnos</h2><p>Nos vemos bajo la luz de la luna.</p><div class="dato">Daniela & Mauricio</div><p>17 · Octubre · 2026</p></div></section>
-
 <audio id="audio" loop preload="auto" playsinline><source src="musica.mp3" type="audio/mpeg"></audio>
 <script>
 const audio=document.getElementById('audio'),audioOverlay=document.getElementById('audioOverlay'),musicBtn=document.getElementById('musicBtn'),bg=document.getElementById('bg');
 function startExperience(){audioOverlay.style.display='none';document.body.classList.remove('lock');audio.volume=.85;audio.play().then(()=>musicBtn.textContent='♫ Pausar').catch(()=>musicBtn.textContent='♫ Música')}
 function toggleMusic(){audio.volume=.85;if(audio.paused){audio.play().then(()=>musicBtn.textContent='♫ Pausar')}else{audio.pause();musicBtn.textContent='♫ Música'}}
 const isMobile=window.matchMedia('(max-width:700px)').matches;if(!isMobile){window.addEventListener('scroll',()=>{const y=window.scrollY;bg.style.backgroundPosition=`center ${-y*0.06}px`},{passive:true})}
-const cards=[...document.querySelectorAll('.card')];const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})},{threshold:.35});cards.forEach(c=>obs.observe(c));
+const cards=[...document.querySelectorAll('.card')];const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})},{threshold:.25});cards.forEach(c=>obs.observe(c));
 const fecha=new Date('2026-10-17T20:00:00').getTime();function updateCount(){const dif=fecha-Date.now();let diasV=0,horasV=0,minV=0,segV=0;if(dif>0){diasV=Math.floor(dif/(1000*60*60*24));horasV=Math.floor((dif%(1000*60*60*24))/(1000*60*60));minV=Math.floor((dif%(1000*60*60))/(1000*60));segV=Math.floor((dif%(1000*60))/1000)}d.textContent=diasV;h.textContent=horasV;m.textContent=minV;s.textContent=segV}setInterval(updateCount,1000);updateCount();
-const layer=document.getElementById('layer'),hasButterflyImage=true;const butterflyCount=isMobile?7:16;
-for(let i=0;i<butterflyCount;i++){let b;if(hasButterflyImage){b=document.createElement('img');b.src='mariposa_azul.png';b.className='butterfly'}else{b=document.createElement('div');b.textContent='🦋';b.className='butterfly emoji'}b.style.left=Math.random()*100+'vw';b.style.top=Math.random()*100+'vh';layer.appendChild(b);let x=parseFloat(b.style.left),y=parseFloat(b.style.top),t=Math.random()*10,sp=.012+Math.random()*.02,scale=.5+Math.random()*.8,dir=Math.random()<.5?-1:1;function move(){t+=sp;x+=Math.sin(t)*.05*dir;y+=Math.cos(t*1.15)*.035-.008;if(y<-15)y=110;if(x<-15)x=110;if(x>110)x=-15;const flap=1+Math.sin(t*18)*.08,rot=Math.sin(t*2)*10*dir;b.style.left=x+'vw';b.style.top=y+'vh';b.style.transform='translate(-50%,-50%) scale('+scale*flap+') rotate('+rot+'deg)';requestAnimationFrame(move)}move()}
+const layer=document.getElementById('layer'),butterflyCount=isMobile?7:16;
+for(let i=0;i<butterflyCount;i++){const b=document.createElement('img');b.src='mariposa_azul.png';b.className='butterfly';b.style.left=Math.random()*100+'vw';b.style.top=Math.random()*100+'vh';layer.appendChild(b);let x=parseFloat(b.style.left),y=parseFloat(b.style.top),t=Math.random()*10,sp=.012+Math.random()*.02,scale=.5+Math.random()*.8,dir=Math.random()<.5?-1:1;function move(){t+=sp;x+=Math.sin(t)*.05*dir;y+=Math.cos(t*1.15)*.035-.008;if(y<-15)y=110;if(x<-15)x=110;if(x>110)x=-15;const flap=1+Math.sin(t*18)*.08,rot=Math.sin(t*2)*10*dir;b.style.left=x+'vw';b.style.top=y+'vh';b.style.transform='translate(-50%,-50%) scale('+scale*flap+') rotate('+rot+'deg)';requestAnimationFrame(move)}move()}
 function sparkle(){const s=document.createElement('div');s.className='sparkle';s.style.left=Math.random()*100+'vw';s.style.top='105vh';layer.appendChild(s);let y=105,x=parseFloat(s.style.left),life=0;function move(){life++;y-=.10+Math.random()*.035;x+=Math.sin(life*.035)*.05;s.style.top=y+'vh';s.style.left=x+'vw';s.style.opacity=Math.max(0,1-life/900);if(life<900)requestAnimationFrame(move);else s.remove()}move()}if(!isMobile){setInterval(sparkle,120)}
 </script>
 </body></html>
