@@ -21,7 +21,7 @@ body.lock{overflow:hidden}
 .audioBox p{color:#d8f8ff;font-size:18px;line-height:1.5}
 button,.btn{margin-top:24px;border:none;border-radius:999px;padding:15px 26px;color:white;font-size:17px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;background:linear-gradient(45deg,#0b4cff,#00d9ff,#7b5cff);box-shadow:0 0 24px rgba(0,210,255,.55)}
 .musicBtn{position:fixed;right:18px;top:18px;z-index:30;background:rgba(0,0,0,.58);border:1px solid rgba(150,225,255,.4);border-radius:999px;padding:10px 15px;color:#d8f8ff;cursor:pointer;box-shadow:0 0 18px rgba(0,210,255,.25);margin:0}
-section{position:relative;z-index:5;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:60px 20px}
+section{position:relative;z-index:5;min-height:auto;display:flex;align-items:center;justify-content:center;padding:15px 15px}
 .card{width:min(92vw,760px);padding:38px 26px;border-radius:30px;text-align:center;background:radial-gradient(circle at top,rgba(0,210,255,.18),transparent 35%),rgba(5,16,32,.78);border:1px solid rgba(150,225,255,.42);box-shadow:0 0 55px rgba(0,210,255,.28);backdrop-filter:blur(8px);opacity:0;transform:translateY(60px) scale(.96);transition:1s ease}
 .card.show{opacity:1;transform:translateY(0) scale(1)}
 .monograma{width:135px;height:135px;margin:0 auto 26px;border:2px solid #d7bd7e;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#d7bd7e;font-size:38px;line-height:.9;background:rgba(0,0,0,.22);box-shadow:0 0 25px rgba(215,189,126,.25)}
@@ -43,7 +43,87 @@ p{font-size:21px;line-height:1.6;color:#d8f8ff;margin:12px 0}
 .env:nth-child(1){left:10%;animation-delay:0s}.env:nth-child(2){left:30%;animation-delay:1s}.env:nth-child(3){left:55%;animation-delay:.5s}.env:nth-child(4){left:75%;animation-delay:1.8s}.env:nth-child(5){left:90%;animation-delay:2.4s}
 @keyframes glow{from{filter:drop-shadow(0 0 10px #00aaff) drop-shadow(0 0 18px rgba(0,150,255,.55))}to{filter:drop-shadow(0 0 18px #00d9ff) drop-shadow(0 0 35px rgba(0,200,255,.9))}}
 @keyframes fall{0%{top:-50px;transform:rotate(0deg)}100%{top:180px;transform:rotate(360deg)}}
-@media(max-width:700px){.bg{background-size:cover;background-position:center top;transform:none}.vignette{background:linear-gradient(to bottom,rgba(0,0,0,.08),rgba(0,0,0,.45),rgba(0,0,0,.78))}section{padding:48px 16px}.card{padding:30px 18px;backdrop-filter:none;background:rgba(5,16,32,.82)}p{font-size:17px}.counter{grid-template-columns:repeat(2,1fr)}.butterfly{width:70px}.butterfly.emoji{font-size:32px}.sparkle{display:none}}
+@media(max-width:700px){
+    /* Fondo */
+    .bg{
+        background-size:cover;
+        background-position:center top;
+        background-repeat:no-repeat;
+        transform:none;
+    }
+    .vignette{
+        background:linear-gradient(
+            to bottom,
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.40),
+            rgba(0,0,0,.75)
+        );
+    }
+    /* Secciones más juntas */
+    section{
+        min-height:auto;
+        padding:10px 8px;
+        margin:0;
+    }
+    /* Tarjetas más pequeñas y pegadas */
+    .card{
+        width:95%;
+        padding:22px 16px;
+        margin:8px auto;
+        backdrop-filter:none;
+        background:rgba(5,16,32,.82);
+        border-radius:25px;
+    }
+    /* Letras */
+    h1{
+        font-size:50px;
+    }
+    h2{
+        font-size:34px;
+        margin-bottom:8px;
+    }
+    p{
+        font-size:17px;
+        margin:6px 0;
+    }
+    .dato{
+        font-size:44px;
+        margin:8px 0;
+    }
+    /* Contador */
+    .counter{
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+    .box{
+        padding:12px 5px;
+    }
+    .num{
+        font-size:28px;
+    }
+    /* Mariposas */
+    .butterfly{
+        width:65px;
+    }
+
+    .butterfly.big{
+        width:85px;
+    }
+
+    .butterfly.small{
+        width:45px;
+    }
+
+    .butterfly.emoji{
+        font-size:28px;
+    }
+
+    /* Quitar partículas para que vaya fluido */
+    .sparkle{
+        display:none;
+    }
+
+}
 </style>
 </head>
 <body class="lock">
