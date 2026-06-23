@@ -69,14 +69,215 @@ h1{font-size:50px} h2{font-size:34px;margin-bottom:8px} p{font-size:17px;margin:
 .butterfly{width:65px}.sparkle{display:none}.mapFrame{height:290px}.envelope{width:170px;height:115px}
 .bookForm{grid-template-columns:1fr}.submitBook{grid-column:1}
 }
+
+/* SOBRE 3D Y PESTAÑA DE ENTRADA */
+.audioOverlay.opening3d{
+  animation:fadeAway 1.2s ease forwards 1.6s;
+}
+
+.scene3d{
+  width:min(92vw,620px);
+  height:430px;
+  perspective:1200px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.envelope3d{
+  position:absolute;
+  width:min(78vw,420px);
+  height:260px;
+  transform-style:preserve-3d;
+  transform:rotateX(10deg) rotateY(-8deg);
+  transition:1.4s ease;
+}
+
+.envelope3d .back{
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:linear-gradient(135deg,#d7bd7e,#8a6a37);
+  box-shadow:0 35px 70px rgba(0,0,0,.55),0 0 40px rgba(0,210,255,.22);
+  transform:translateZ(-8px);
+}
+
+.envelope3d .front{
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:
+    linear-gradient(135deg,transparent 49%,rgba(255,255,255,.18) 50%,transparent 52%),
+    linear-gradient(45deg,#8a6a37,#e1c785);
+  clip-path:polygon(0 34%,50% 70%,100% 34%,100% 100%,0 100%);
+  transform:translateZ(12px);
+  box-shadow:inset 0 0 28px rgba(0,0,0,.35);
+}
+
+.envelope3d .flap{
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:linear-gradient(135deg,#f2d99a,#91713d);
+  clip-path:polygon(0 34%,50% 76%,100% 34%,50% 0);
+  transform-origin:50% 34%;
+  transform:translateZ(18px) rotateX(0deg);
+  transition:1.2s ease;
+}
+
+.envelope3d .seal{
+  position:absolute;
+  left:50%;
+  top:57%;
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  transform:translate(-50%,-50%) translateZ(30px);
+  background:radial-gradient(circle,#891b2b,#4a0710);
+  box-shadow:0 0 22px rgba(160,20,40,.65), inset 0 0 18px rgba(0,0,0,.4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f7d7a0;
+  font-size:25px;
+  font-weight:bold;
+}
+
+.letter3d{
+  position:absolute;
+  width:min(72vw,370px);
+  height:230px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff8df,#d7bd7e);
+  color:#2d1b10;
+  box-shadow:0 25px 60px rgba(0,0,0,.55);
+  transform:translateY(35px) translateZ(0) rotateX(8deg);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  opacity:.94;
+  transition:1.4s ease;
+}
+
+.letter3d h1{
+  color:#614112;
+  text-shadow:none;
+  font-size:44px;
+}
+
+.letter3d p{
+  color:#2d1b10;
+  font-size:18px;
+  padding:0 25px;
+}
+
+.invitationTab{
+  position:absolute;
+  width:min(90vw,520px);
+  height:350px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at top,rgba(0,210,255,.22),transparent 40%),
+    rgba(5,16,32,.94);
+  border:1px solid rgba(150,225,255,.45);
+  box-shadow:0 35px 90px rgba(0,0,0,.65),0 0 55px rgba(0,210,255,.35);
+  transform:rotateX(78deg) translateY(130px) scale(.55);
+  transform-origin:bottom center;
+  opacity:0;
+  transition:1.4s ease .7s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+
+.invitationTab h2{
+  font-size:clamp(34px,7vw,64px);
+}
+
+.audioOverlay.opening3d .envelope3d{
+  transform:translateY(-130px) scale(.78) rotateX(18deg) rotateY(0deg);
+  opacity:.45;
+}
+
+.audioOverlay.opening3d .flap{
+  transform:translateZ(18px) rotateX(158deg);
+}
+
+.audioOverlay.opening3d .letter3d{
+  transform:translateY(-120px) translateZ(70px) rotateX(0deg) scale(.78);
+  opacity:0;
+}
+
+.audioOverlay.opening3d .invitationTab{
+  transform:rotateX(0deg) translateY(0) scale(1);
+  opacity:1;
+}
+
+.open3dBtn{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+}
+
+@keyframes fadeAway{
+  to{opacity:0;pointer-events:none;visibility:hidden}
+}
+
+@media(max-width:700px){
+  .scene3d{
+    height:380px;
+  }
+
+  .envelope3d{
+    height:220px;
+  }
+
+  .letter3d{
+    height:200px;
+  }
+
+  .invitationTab{
+    height:310px;
+  }
+
+  .letter3d h1{
+    font-size:34px;
+  }
+}
+
 </style>
 </head>
 <body class="lock">
 <div class="bg" id="bg"></div><div class="vignette"></div><div class="layer" id="layer"></div>
-<div class="audioOverlay" id="audioOverlay"><div class="audioBox">
-<div class="envelope"><div class="envLetter"></div><div class="envBack"></div><div class="envFlap"></div></div>
-<h1>Daniela & Mauricio</h1><p>Presiona para abrir el sobre y activar la música.</p><button onclick="startExperience()">ABRIR INVITACIÓN</button>
-</div></div>
+<div class="audioOverlay" id="audioOverlay">
+  <div class="scene3d">
+    <div class="letter3d">
+      <h1>D & M</h1>
+      <p>Una historia escrita bajo la luz de la luna.</p>
+    </div>
+
+    <div class="envelope3d">
+      <div class="back"></div>
+      <div class="flap"></div>
+      <div class="front"></div>
+      <div class="seal">D<br>M</div>
+    </div>
+
+    <div class="invitationTab">
+      <h2>Daniela & Mauricio</h2>
+      <p>La invitación se ha abierto.</p>
+      <p>Desliza hacia abajo para ver todos los detalles.</p>
+    </div>
+
+    <button class="open3dBtn" onclick="startExperience()">ABRIR SOBRE</button>
+  </div>
+</div>
 <button class="musicBtn" id="musicBtn" onclick="toggleMusic()">♫ Música</button>
 <section><div class="card"><div class="monograma"><span>D</span><span>M</span></div><h1>DANIELA</h1><div class="y">y</div><h1>MAURICIO</h1><div class="adorno"></div><p>Una historia escrita bajo la luz de la luna.</p><p>Desliza hacia abajo para ver los detalles de nuestra boda.</p></div></section>
 <section><div class="card"><div class="icon">📅</div><h2>Fecha</h2><div class="dato">17 de Octubre</div><p>2026</p></div></section>
@@ -98,7 +299,13 @@ h1{font-size:50px} h2{font-size:34px;margin-bottom:8px} p{font-size:17px;margin:
 <audio id="audio" loop preload="auto" playsinline><source src="musica.mp3" type="audio/mpeg"></audio>
 <script>
 const audio=document.getElementById('audio'),audioOverlay=document.getElementById('audioOverlay'),musicBtn=document.getElementById('musicBtn'),bg=document.getElementById('bg');
-function startExperience(){audioOverlay.style.display='none';document.body.classList.remove('lock');audio.volume=.85;audio.play().then(()=>musicBtn.textContent='♫ Pausar').catch(()=>musicBtn.textContent='♫ Música')}
+function startExperience(){
+  audioOverlay.classList.add('opening3d');
+  document.body.classList.remove('lock');
+  audio.volume=.85;
+  audio.play().then(()=>musicBtn.textContent='♫ Pausar').catch(()=>musicBtn.textContent='♫ Música');
+  setTimeout(()=>{audioOverlay.style.display='none'},2900);
+}
 function toggleMusic(){audio.volume=.85;if(audio.paused){audio.play().then(()=>musicBtn.textContent='♫ Pausar')}else{audio.pause();musicBtn.textContent='♫ Música'}}
 function fakeSubmit(e){e.preventDefault();alert('Gracias. Cuando conectemos el Google Form, esta información se guardará en Google Sheets.');}
 const isMobile=window.matchMedia('(max-width:700px)').matches;if(!isMobile){window.addEventListener('scroll',()=>{const y=window.scrollY;bg.style.backgroundPosition=`center ${-y*0.06}px`},{passive:true})}
